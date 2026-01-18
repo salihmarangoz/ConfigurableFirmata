@@ -66,6 +66,8 @@ void AnalogInputFirmata::reportAnalog(byte analogPin, bool enable, byte physical
             // Send pin value immediately. This is helpful when connected via
             // ethernet, wi-fi or bluetooth so pin states can be known upon
             // reconnecting.
+        analogRead(physicalPin); // dummy
+        analogRead(physicalPin); // dummy
 		    Firmata.sendAnalog(analogPin, analogRead(physicalPin));
         }
     }
@@ -136,6 +138,8 @@ void AnalogInputFirmata::report(bool elapsed)
     if (FIRMATA_IS_PIN_ANALOG(pin) && Firmata.getPinMode(pin) == PIN_MODE_ANALOG) {
       analogPin = PIN_TO_ANALOG(pin);
       if (analogInputsToReport & (1 << analogPin)) {
+        analogRead(pin); // dummy
+        analogRead(pin); // dummy
         Firmata.sendAnalog(analogPin, analogRead(pin));
       }
     }
